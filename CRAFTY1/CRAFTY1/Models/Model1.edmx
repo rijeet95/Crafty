@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="crafty1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'crafty1.dbo.CartTable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CartTable">
+          <Property Name="P_ID" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="C_ID" />
+          </Key>
+          <Property Name="C_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="OrderTable">
+          <Key>
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="O_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_ID" Type="int" />
+          <Property Name="Customer_ID" Type="int" />
+          <Property Name="O_Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Product_Image" Type="varbinary(max)" />
+          <Property Name="Product_Price" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Product_Descriptation" Type="varchar(max)" Nullable="false" />
+          <Property Name="Categories" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Product_Stock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Seller_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seller_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seller_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seller_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seller_Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Web_Admin">
+          <Key>
+            <PropertyRef Name="WA_ID" />
+          </Key>
+          <Property Name="WA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Web_Admin_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Web_Admin_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Web_Admin_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Web_Admin_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Web_Admin_Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Web_Admin_Image" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+error 6004: The table 'crafty1.dbo.CartTable' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CartTable__P_ID__45F365D3" />-->
+        <Association Name="FK__OrderTabl__Custo__49C3F6B7">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="C_ID" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTable__P_ID__48CFD27E">
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTable">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="crafty1ModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTable" EntityType="Self.OrderTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Web_Admin" EntityType="Self.Web_Admin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__OrderTabl__Custo__49C3F6B7" Association="Self.FK__OrderTabl__Custo__49C3F6B7">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="OrderTable" EntitySet="OrderTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTable__P_ID__48CFD27E" Association="Self.FK__OrderTable__P_ID__48CFD27E">
+            <End Role="ProductTable" EntitySet="ProductTable" />
+            <End Role="OrderTable" EntitySet="OrderTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="crafty1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="C_ID" />
+          </Key>
+          <Property Name="C_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OrderTables" Relationship="Self.FK__OrderTabl__Custo__49C3F6B7" FromRole="Customer" ToRole="OrderTable" />
+        </EntityType>
+        <EntityType Name="OrderTable">
+          <Key>
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="O_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_ID" Type="Int32" />
+          <Property Name="Customer_ID" Type="Int32" />
+          <Property Name="O_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__OrderTabl__Custo__49C3F6B7" FromRole="OrderTable" ToRole="Customer" />
+          <NavigationProperty Name="ProductTable" Relationship="Self.FK__OrderTable__P_ID__48CFD27E" FromRole="OrderTable" ToRole="ProductTable" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Product_Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_Descriptation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Categories" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_Stock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderTables" Relationship="Self.FK__OrderTable__P_ID__48CFD27E" FromRole="ProductTable" ToRole="OrderTable" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Seller_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seller_Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seller_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seller_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seller_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Web_Admin">
+          <Key>
+            <PropertyRef Name="WA_ID" />
+          </Key>
+          <Property Name="WA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Web_Admin_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Web_Admin_Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Web_Admin_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Web_Admin_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Web_Admin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Web_Admin_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__OrderTabl__Custo__49C3F6B7">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="C_ID" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTable__P_ID__48CFD27E">
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTable">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="crafty1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="OrderTables" EntityType="Self.OrderTable" />
+          <EntitySet Name="ProductTables" EntityType="Self.ProductTable" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
+          <EntitySet Name="Web_Admin" EntityType="Self.Web_Admin" />
+          <AssociationSet Name="FK__OrderTabl__Custo__49C3F6B7" Association="Self.FK__OrderTabl__Custo__49C3F6B7">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="OrderTable" EntitySet="OrderTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTable__P_ID__48CFD27E" Association="Self.FK__OrderTable__P_ID__48CFD27E">
+            <End Role="ProductTable" EntitySet="ProductTables" />
+            <End Role="OrderTable" EntitySet="OrderTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="crafty1ModelStoreContainer" CdmEntityContainer="crafty1Entities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="crafty1Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_Mail" ColumnName="Customer_Mail" />
+                <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+                <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
+                <ScalarProperty Name="Customer_Password" ColumnName="Customer_Password" />
+                <ScalarProperty Name="Customer_Image" ColumnName="Customer_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTables">
+            <EntityTypeMapping TypeName="crafty1Model.OrderTable">
+              <MappingFragment StoreEntitySet="OrderTable">
+                <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="O_Status" ColumnName="O_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTables">
+            <EntityTypeMapping TypeName="crafty1Model.ProductTable">
+              <MappingFragment StoreEntitySet="ProductTable">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_Image" ColumnName="Product_Image" />
+                <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+                <ScalarProperty Name="Product_Descriptation" ColumnName="Product_Descriptation" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="Product_Stock" ColumnName="Product_Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="crafty1Model.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="Seller_Name" ColumnName="Seller_Name" />
+                <ScalarProperty Name="Seller_Mail" ColumnName="Seller_Mail" />
+                <ScalarProperty Name="Seller_Phone" ColumnName="Seller_Phone" />
+                <ScalarProperty Name="Seller_Address" ColumnName="Seller_Address" />
+                <ScalarProperty Name="Seller_Image" ColumnName="Seller_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Web_Admin">
+            <EntityTypeMapping TypeName="crafty1Model.Web_Admin">
+              <MappingFragment StoreEntitySet="Web_Admin">
+                <ScalarProperty Name="WA_ID" ColumnName="WA_ID" />
+                <ScalarProperty Name="Web_Admin_Name" ColumnName="Web_Admin_Name" />
+                <ScalarProperty Name="Web_Admin_Mail" ColumnName="Web_Admin_Mail" />
+                <ScalarProperty Name="Web_Admin_Phone" ColumnName="Web_Admin_Phone" />
+                <ScalarProperty Name="Web_Admin_Address" ColumnName="Web_Admin_Address" />
+                <ScalarProperty Name="Web_Admin_Password" ColumnName="Web_Admin_Password" />
+                <ScalarProperty Name="Web_Admin_Image" ColumnName="Web_Admin_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

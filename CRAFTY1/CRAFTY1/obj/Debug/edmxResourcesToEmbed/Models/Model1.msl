@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="crafty1ModelStoreContainer" CdmEntityContainer="crafty1Entities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="crafty1Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="C_ID" ColumnName="C_ID" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Customer_Mail" ColumnName="Customer_Mail" />
+          <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+          <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
+          <ScalarProperty Name="Customer_Password" ColumnName="Customer_Password" />
+          <ScalarProperty Name="Customer_Image" ColumnName="Customer_Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTables">
+      <EntityTypeMapping TypeName="crafty1Model.OrderTable">
+        <MappingFragment StoreEntitySet="OrderTable">
+          <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="O_Status" ColumnName="O_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTables">
+      <EntityTypeMapping TypeName="crafty1Model.ProductTable">
+        <MappingFragment StoreEntitySet="ProductTable">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+          <ScalarProperty Name="Product_Image" ColumnName="Product_Image" />
+          <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+          <ScalarProperty Name="Product_Descriptation" ColumnName="Product_Descriptation" />
+          <ScalarProperty Name="Categories" ColumnName="Categories" />
+          <ScalarProperty Name="Product_Stock" ColumnName="Product_Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sellers">
+      <EntityTypeMapping TypeName="crafty1Model.Seller">
+        <MappingFragment StoreEntitySet="Seller">
+          <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+          <ScalarProperty Name="Seller_Name" ColumnName="Seller_Name" />
+          <ScalarProperty Name="Seller_Mail" ColumnName="Seller_Mail" />
+          <ScalarProperty Name="Seller_Phone" ColumnName="Seller_Phone" />
+          <ScalarProperty Name="Seller_Address" ColumnName="Seller_Address" />
+          <ScalarProperty Name="Seller_Image" ColumnName="Seller_Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Web_Admin">
+      <EntityTypeMapping TypeName="crafty1Model.Web_Admin">
+        <MappingFragment StoreEntitySet="Web_Admin">
+          <ScalarProperty Name="WA_ID" ColumnName="WA_ID" />
+          <ScalarProperty Name="Web_Admin_Name" ColumnName="Web_Admin_Name" />
+          <ScalarProperty Name="Web_Admin_Mail" ColumnName="Web_Admin_Mail" />
+          <ScalarProperty Name="Web_Admin_Phone" ColumnName="Web_Admin_Phone" />
+          <ScalarProperty Name="Web_Admin_Address" ColumnName="Web_Admin_Address" />
+          <ScalarProperty Name="Web_Admin_Password" ColumnName="Web_Admin_Password" />
+          <ScalarProperty Name="Web_Admin_Image" ColumnName="Web_Admin_Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

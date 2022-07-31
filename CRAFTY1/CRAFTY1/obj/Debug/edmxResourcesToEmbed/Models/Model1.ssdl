@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="crafty1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'crafty1.dbo.CartTable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CartTable">
+          <Property Name="P_ID" Type="int" />
+        </EntityType>-->
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="C_ID" />
+    </Key>
+    <Property Name="C_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="OrderTable">
+    <Key>
+      <PropertyRef Name="O_ID" />
+    </Key>
+    <Property Name="O_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_ID" Type="int" />
+    <Property Name="Customer_ID" Type="int" />
+    <Property Name="O_Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductTable">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_Image" Type="varbinary(max)" />
+    <Property Name="Product_Price" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_Descriptation" Type="varchar(max)" Nullable="false" />
+    <Property Name="Categories" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_Stock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seller">
+    <Key>
+      <PropertyRef Name="S_ID" />
+    </Key>
+    <Property Name="S_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Seller_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Seller_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Seller_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Seller_Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Seller_Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Web_Admin">
+    <Key>
+      <PropertyRef Name="WA_ID" />
+    </Key>
+    <Property Name="WA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Web_Admin_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Web_Admin_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Web_Admin_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Web_Admin_Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Web_Admin_Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Web_Admin_Image" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+error 6004: The table 'crafty1.dbo.CartTable' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CartTable__P_ID__45F365D3" />-->
+  <Association Name="FK__OrderTabl__Custo__49C3F6B7">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="C_ID" />
+      </Principal>
+      <Dependent Role="OrderTable">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTable__P_ID__48CFD27E">
+    <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+    <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductTable">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="OrderTable">
+        <PropertyRef Name="P_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="crafty1ModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTable" EntityType="Self.OrderTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Web_Admin" EntityType="Self.Web_Admin" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__OrderTabl__Custo__49C3F6B7" Association="Self.FK__OrderTabl__Custo__49C3F6B7">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="OrderTable" EntitySet="OrderTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTable__P_ID__48CFD27E" Association="Self.FK__OrderTable__P_ID__48CFD27E">
+      <End Role="ProductTable" EntitySet="ProductTable" />
+      <End Role="OrderTable" EntitySet="OrderTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
